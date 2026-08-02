@@ -79,8 +79,6 @@ macro_rules! windows_install_command {
     };
 }
 
-pub(crate) use windows_install_command;
-
 #[cfg(test)]
 mod tests {
     use crate::managed_agents::known_acp_runtime_exact;
