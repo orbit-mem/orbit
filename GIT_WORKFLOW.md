@@ -21,6 +21,14 @@ git merge main
 git push origin orbit
 ```
 
+### root for cognee build
+
+```bash
+git checkout root
+git merge main
+git push origin root
+```
+
 If there are merge conflicts, Git will pause the merge. Resolve the conflicts, then run:
 
 ```bash

@@ -49,13 +49,6 @@ class TappableFlappingBee extends HookConsumerWidget {
           child: AnimatedBuilder(
             animation: animation,
             builder: (context, _) {
-<<<<<<< HEAD
-              final flapAmount = 0.5 - (0.5 * cos(animation.value * 4 * pi));
-              return FlappingBee(
-                width: width,
-                color: color,
-                flapAmount: flapAmount,
-=======
               // Smooth cosine bounce: 1.0 -> 0.85 -> 1.0
               final scaleFactor = 1.0 - 0.15 * (0.5 - 0.5 * cos(animation.value * 2 * pi));
               return Transform.scale(
@@ -66,7 +59,6 @@ class TappableFlappingBee extends HookConsumerWidget {
                   height: width * 300 / 306,
                   colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
                 ),
->>>>>>> d009eb55e79c28bc814b6d725d976684889cd730
               );
             },
           ),
