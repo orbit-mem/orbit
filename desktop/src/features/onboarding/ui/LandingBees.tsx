@@ -72,9 +72,7 @@ const COLLISION_STRENGTH = 0.18;
 export function LandingBees() {
   const fieldRef = React.useRef<HTMLDivElement>(null);
 
-  const beeRefs = React.useRef<
-    (HTMLSpanElement | null)[]
-  >([]);
+  const beeRefs = React.useRef<(HTMLSpanElement | null)[]>([]);
 
   const pointer = React.useRef<{
     x: number;
@@ -111,26 +109,12 @@ export function LandingBees() {
         const phase = i * 1.7;
 
         const wx =
-          Math.sin(
-            t * (0.55 + (i % 5) * 0.08) +
-              phase,
-          ) *
-            WANDER_X +
-          Math.sin(
-            t * 1.3 + phase * 2.1,
-          ) *
-            3;
+          Math.sin(t * (0.55 + (i % 5) * 0.08) + phase) * WANDER_X +
+          Math.sin(t * 1.3 + phase * 2.1) * 3;
 
         const wy =
-          Math.cos(
-            t * (0.5 + (i % 7) * 0.07) +
-              phase,
-          ) *
-            WANDER_Y +
-          Math.cos(
-            t * 1.5 + phase * 1.3,
-          ) *
-            3;
+          Math.cos(t * (0.5 + (i % 7) * 0.07) + phase) * WANDER_Y +
+          Math.cos(t * 1.5 + phase * 1.3) * 3;
 
         let rx = 0;
         let ry = 0;
@@ -141,16 +125,12 @@ export function LandingBees() {
         if (p) {
           const cx =
             rect.left +
-            (rect.width *
-              parseFloat(bee.left)) /
-              100 +
+            (rect.width * parseFloat(bee.left)) / 100 +
             offsets.current[i].x;
 
           const cy =
             rect.top +
-            (rect.height *
-              parseFloat(bee.top)) /
-              100 +
+            (rect.height * parseFloat(bee.top)) / 100 +
             offsets.current[i].y;
 
           const ox = cx - p.x;
@@ -158,14 +138,9 @@ export function LandingBees() {
 
           const dist = Math.hypot(ox, oy);
 
-          if (
-            dist < REPEL_RADIUS &&
-            dist > 0.01
-          ) {
+          if (dist < REPEL_RADIUS && dist > 0.01) {
             const push =
-              ((REPEL_RADIUS - dist) /
-                REPEL_RADIUS) *
-              REPEL_STRENGTH;
+              ((REPEL_RADIUS - dist) / REPEL_RADIUS) * REPEL_STRENGTH;
 
             rx = (ox / dist) * push;
             ry = (oy / dist) * push;
@@ -188,67 +163,34 @@ export function LandingBees() {
        * If their visual bounds get too close, both particles
        * receive an equal push in opposite directions.
        */
-      for (
-        let i = 0;
-        i < BEES.length;
-        i++
-      ) {
-        for (
-          let j = i + 1;
-          j < BEES.length;
-          j++
-        ) {
+      for (let i = 0; i < BEES.length; i++) {
+        for (let j = i + 1; j < BEES.length; j++) {
           const beeA = BEES[i];
           const beeB = BEES[j];
 
-          const ax =
-            (rect.width *
-              parseFloat(beeA.left)) /
-              100 +
-            targets[i].x;
+          const ax = (rect.width * parseFloat(beeA.left)) / 100 + targets[i].x;
 
-          const ay =
-            (rect.height *
-              parseFloat(beeA.top)) /
-              100 +
-            targets[i].y;
+          const ay = (rect.height * parseFloat(beeA.top)) / 100 + targets[i].y;
 
-          const bx =
-            (rect.width *
-              parseFloat(beeB.left)) /
-              100 +
-            targets[j].x;
+          const bx = (rect.width * parseFloat(beeB.left)) / 100 + targets[j].x;
 
-          const by =
-            (rect.height *
-              parseFloat(beeB.top)) /
-              100 +
-            targets[j].y;
+          const by = (rect.height * parseFloat(beeB.top)) / 100 + targets[j].y;
 
           const dx = ax - bx;
           const dy = ay - by;
 
-          const distance =
-            Math.hypot(dx, dy);
+          const distance = Math.hypot(dx, dy);
 
           const minimumDistance =
-            beeA.size / 2 +
-            beeB.size / 2 +
-            COLLISION_PADDING;
+            beeA.size / 2 + beeB.size / 2 + COLLISION_PADDING;
 
-          if (
-            distance < minimumDistance &&
-            distance > 0.01
-          ) {
-            const overlap =
-              minimumDistance - distance;
+          if (distance < minimumDistance && distance > 0.01) {
+            const overlap = minimumDistance - distance;
 
             const nx = dx / distance;
             const ny = dy / distance;
 
-            const push =
-              overlap *
-              COLLISION_STRENGTH;
+            const push = overlap * COLLISION_STRENGTH;
 
             targets[i].x += nx * push;
             targets[i].y += ny * push;
@@ -262,29 +204,23 @@ export function LandingBees() {
       /**
        * Apply final positions.
        */
-      beeRefs.current.forEach(
-        (el, i) => {
-          if (!el) return;
+      beeRefs.current.forEach((el, i) => {
+        if (!el) return;
 
-          const bee = BEES[i];
+        const bee = BEES[i];
 
-          const target = targets[i];
+        const target = targets[i];
 
-          const cur =
-            offsets.current[i];
+        const cur = offsets.current[i];
 
-          /**
-           * Smooth movement instead of snapping.
-           */
-          cur.x +=
-            (target.x - cur.x) *
-            0.09;
+        /**
+         * Smooth movement instead of snapping.
+         */
+        cur.x += (target.x - cur.x) * 0.09;
 
-          cur.y +=
-            (target.y - cur.y) *
-            0.09;
+        cur.y += (target.y - cur.y) * 0.09;
 
-          el.style.transform = `
+        el.style.transform = `
             translate3d(
               ${cur.x}px,
               ${cur.y}px,
@@ -292,16 +228,12 @@ export function LandingBees() {
             )
             rotate(${bee.rotate}deg)
           `;
-        },
-      );
+      });
 
-      raf =
-        requestAnimationFrame(tick);
+      raf = requestAnimationFrame(tick);
     };
 
-    const onMove = (
-      event: MouseEvent,
-    ) => {
+    const onMove = (event: MouseEvent) => {
       pointer.current = {
         x: event.clientX,
         y: event.clientY,
@@ -312,36 +244,20 @@ export function LandingBees() {
       pointer.current = null;
     };
 
-    const reduced =
-      window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      );
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     if (!reduced.matches) {
-      raf =
-        requestAnimationFrame(tick);
+      raf = requestAnimationFrame(tick);
 
-      window.addEventListener(
-        "mousemove",
-        onMove,
-      );
+      window.addEventListener("mousemove", onMove);
 
-      window.addEventListener(
-        "mouseout",
-        onLeave,
-      );
+      window.addEventListener("mouseout", onLeave);
     }
 
     return () => {
-      window.removeEventListener(
-        "mousemove",
-        onMove,
-      );
+      window.removeEventListener("mousemove", onMove);
 
-      window.removeEventListener(
-        "mouseout",
-        onLeave,
-      );
+      window.removeEventListener("mouseout", onLeave);
 
       if (raf) {
         cancelAnimationFrame(raf);
@@ -412,17 +328,12 @@ export function LandingBees() {
              * of each integration rather than its top-left
              * corner.
              */
-            marginLeft:
-              -(bee.size / 2),
+            marginLeft: -(bee.size / 2),
 
-            marginTop:
-              -(bee.size / 2),
+            marginTop: -(bee.size / 2),
           }}
         >
-          <FlappingBee
-            className="w-full"
-            index={i}
-          />
+          <FlappingBee className="w-full" index={i} />
         </span>
       ))}
     </div>

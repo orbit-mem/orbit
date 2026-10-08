@@ -202,20 +202,15 @@ const ORBIT_CAPABILITIES: Integration[] = [
   },
 ];
 
-export function FlappingBee({
-  className,
-  index = 0,
-}: FlappingBeeProps) {
+export function FlappingBee({ className, index = 0 }: FlappingBeeProps) {
   const maskId = `flapping-bee-cutouts-${useId().replace(
     /[^a-zA-Z0-9_-]/g,
     "",
   )}`;
 
-  const wingLayer =
-    "bee-wing-layer absolute left-0 top-0 h-full w-full";
+  const wingLayer = "bee-wing-layer absolute left-0 top-0 h-full w-full";
 
-  const wingSvg =
-    "bee-wing block h-full w-full overflow-visible";
+  const wingSvg = "bee-wing block h-full w-full overflow-visible";
 
   /*
    * First consume every branded integration.
@@ -236,8 +231,7 @@ export function FlappingBee({
   const integration =
     INTEGRATIONS[index] ??
     ORBIT_CAPABILITIES[
-      (index - INTEGRATIONS.length) %
-        ORBIT_CAPABILITIES.length
+      (index - INTEGRATIONS.length) % ORBIT_CAPABILITIES.length
     ];
 
   const Icon = integration.icon;
@@ -274,12 +268,7 @@ export function FlappingBee({
           viewBox="0 0 100 100"
         >
           <defs>
-            <radialGradient
-              id={`${maskId}-glow`}
-              cx="50%"
-              cy="50%"
-              r="50%"
-            >
+            <radialGradient id={`${maskId}-glow`} cx="50%" cy="50%" r="50%">
               <stop
                 offset="0%"
                 stopColor={integration.color}
@@ -300,12 +289,7 @@ export function FlappingBee({
             </radialGradient>
           </defs>
 
-          <circle
-            cx="50"
-            cy="50"
-            r="45"
-            fill={`url(#${maskId}-glow)`}
-          />
+          <circle cx="50" cy="50" r="45" fill={`url(#${maskId}-glow)`} />
         </svg>
       </div>
 
@@ -330,10 +314,7 @@ export function FlappingBee({
           backdrop-blur-md
         "
       >
-        <Icon
-          className="h-[56%] w-[56%]"
-          color={integration.color}
-        />
+        <Icon className="h-[56%] w-[56%]" color={integration.color} />
       </div>
     </div>
   );

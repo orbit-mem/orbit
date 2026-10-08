@@ -657,7 +657,9 @@ export function TerminalSubstrate({
         <div className="buzz-terminal-readout">
           <button
             aria-label={
-              mode === "maximized" ? "Restore Orbit Term" : "Maximize Orbit Term"
+              mode === "maximized"
+                ? "Restore Orbit Term"
+                : "Maximize Orbit Term"
             }
             className="buzz-terminal-window-action"
             onClick={() =>

@@ -8,10 +8,7 @@ import { useId } from "react";
  * so existing imports/usages do not need to change.
  */
 export function BuzzMark({ className }: { className?: string }) {
-  const maskId = `buzz-mark-cutouts-${useId().replace(
-    /[^a-zA-Z0-9_-]/g,
-    "",
-  )}`;
+  const maskId = `buzz-mark-cutouts-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
 
   return (
     <svg
@@ -37,15 +34,9 @@ export function BuzzMark({ className }: { className?: string }) {
           y2="748.696"
           gradientUnits="userSpaceOnUse"
         >
-          <stop
-            offset="4.32692%"
-            stopColor="#FFFFFF"
-          />
+          <stop offset="4.32692%" stopColor="#FFFFFF" />
 
-          <stop
-            offset="80.7692%"
-            stopColor="#B9B9BE"
-          />
+          <stop offset="80.7692%" stopColor="#B9B9BE" />
         </linearGradient>
 
         {/* =====================================================
@@ -60,15 +51,9 @@ export function BuzzMark({ className }: { className?: string }) {
           y2="628.053"
           gradientUnits="userSpaceOnUse"
         >
-          <stop
-            offset="0%"
-            stopColor="#F109ED"
-          />
+          <stop offset="0%" stopColor="#F109ED" />
 
-          <stop
-            offset="83.1731%"
-            stopColor="#3D42D9"
-          />
+          <stop offset="83.1731%" stopColor="#3D42D9" />
         </linearGradient>
       </defs>
 
