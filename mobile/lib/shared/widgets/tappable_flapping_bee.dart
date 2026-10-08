@@ -50,7 +50,8 @@ class TappableFlappingBee extends HookConsumerWidget {
             animation: animation,
             builder: (context, _) {
               // Smooth cosine bounce: 1.0 -> 0.85 -> 1.0
-              final scaleFactor = 1.0 - 0.15 * (0.5 - 0.5 * cos(animation.value * 2 * pi));
+              final scaleFactor =
+                  1.0 - 0.15 * (0.5 - 0.5 * cos(animation.value * 2 * pi));
               return Transform.scale(
                 scale: scaleFactor,
                 child: SvgPicture.asset(
